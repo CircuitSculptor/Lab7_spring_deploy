@@ -1,39 +1,20 @@
-#services:
-  #greeting-service:
-    #image: ghcr.io/circuitsculptor/greeting-service/app:latest
-    #env_file: ./.env
-    #ports:
-      #- "8081:8081"
-    #networks:
-      #- labnet
-  #proxy-service:
-    #image: ghcr.io/circuitsculptor/proxy-service/app:latest
-    #env_file: ./.env
-    #depends_on:
-     #- greeting-service
-    #ports:
-     #- "8080:8080"
-    #networks:
-     #- labnet
-#networks:
-  #labnet:
-
 services:
   greeting-service:
-    image: greeting-service:latest  # local image
+    image: ghcr.io/circuitsculptor/greeting-service/app:latest
+    env_file: ./.env
     ports:
       - "8081:8081"
     networks:
       - labnet
-
   proxy-service:
-    image: proxy-service:latest    # local image
-    environment:
-      - GREETING_SERVICE_BASE_URL=http://greeting-service:8081
+    image: ghcr.io/circuitsculptor/proxy-service/app:latest
+    env_file: ./.env
+    depends_on:
+     - greeting-service
     ports:
-      - "8080:8080"
+     - "8080:8080"
     networks:
-      - labnet
-
+     - labnet
 networks:
   labnet:
+
