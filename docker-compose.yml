@@ -1,6 +1,7 @@
 services:
   greeting-service:
-    image: ghcr.io/circuitsculptor/greeting-service/app:latest
+    # greeting-service
+    image: ghcr.io/circuitsculptor/openfeign_github_container_registry/app:latest
     env_file: ./.env
     ports:
       - "8081:8081"
